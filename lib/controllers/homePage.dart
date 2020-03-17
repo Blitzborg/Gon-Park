@@ -14,6 +14,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   @override
+
   final List<Widget> pages = [
     Nearby(
           key: PageStorageKey('Nearby'),
