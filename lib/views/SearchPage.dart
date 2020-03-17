@@ -2,8 +2,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class FirstPage extends StatelessWidget{
-   const FirstPage({Key key}) : super(key: key);
+class SearchPage extends StatelessWidget{
+   const SearchPage({Key key}) : super(key: key);
   @override
   Widget build(BuildContext cntxt){
     return Scaffold(

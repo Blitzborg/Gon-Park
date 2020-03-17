@@ -2,8 +2,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class FirstPage extends StatelessWidget{
-   const FirstPage({Key key}) : super(key: key);
+class Bookmarks extends StatelessWidget{
+   const Bookmarks({Key key}) : super(key: key);
   @override
   Widget build(BuildContext cntxt){
     return Scaffold(
