@@ -49,7 +49,7 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              'You have pushed the button this many times:',
+              'You have clicked the button this many times:',
             ),
             // Text(
             //   '$_counter',
@@ -60,18 +60,29 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       bottomNavigationBar: BottomNavigationBar(
        currentIndex: 0, // this will be set when a new tab is tapped
+       
        items: [
          BottomNavigationBarItem(
-           icon: new Icon(Icons.home),
-           title: new Text('Home'),
+           backgroundColor: Colors.black54,
+           icon: new Icon(Icons.location_searching),
+           title: new Text('Nearby')
          ),
          BottomNavigationBarItem(
-           icon: new Icon(Icons.mail),
-           title: new Text('Messages'),
+           backgroundColor: Colors.black54,
+           icon: new Icon(Icons.search),
+           title: new Text('Search')
          ),
+         
          BottomNavigationBarItem(
-           icon: Icon(Icons.person),
-           title: Text('Profile')
+           backgroundColor: Colors.black54,
+           icon: Icon(Icons.star_border),
+           title: Text('Bookmarks')
+         ),
+          BottomNavigationBarItem(
+            backgroundColor: Colors.black54,
+           icon: Icon(Icons.settings),
+           title: Text('Settings')
+           
          )
        ],
      ),
