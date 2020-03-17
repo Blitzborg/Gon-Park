@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:parkapp/views/page1.dart';
-import 'package:parkapp/views/page2.dart';
-
+import 'package:parkapp/views/Nearby.dart';
+import 'package:parkapp/views/Bookmarks.dart';
+import 'package:parkapp/views/SearchPage.dart';
+import 'package:parkapp/views/SettingsPage.dart';
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
 
@@ -13,48 +14,76 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   @override
+
   final List<Widget> pages = [
-    FirstPage(
-      key: PageStorageKey('Page1'),
+    Nearby(
+          key: PageStorageKey('Nearby'),
+        ),
+    SearchPage(
+          key: PageStorageKey('Search'),
+        ),
+    Bookmarks(
+          key: PageStorageKey('Bookmarks'),
+        ),
+    SettingsPage(
+      key: PageStorageKey('Settings'),
     ),
-    SecondPage(
-      key: PageStorageKey('Page2'),
-    ),
-  ];
-  final PageStorageBucket bucket = PageStorageBucket();
-  int _selectedIndex = 0;
+      ];
+      final PageStorageBucket bucket = PageStorageBucket();
+      int _selectedIndex = 0;
 
 
-  Widget _bottomNavigationBar(int selectedIndex) => BottomNavigationBar(
-        onTap: (int index) => setState(() => _selectedIndex = index),
-        currentIndex: selectedIndex,
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-              icon: Icon(Icons.add), title: Text('First Page')),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.list), title: Text('Second Page')),
-        ],
-      );
+      Widget _bottomNavigationBar(int selectedIndex) => BottomNavigationBar(
+            onTap: (int index) => setState(() => _selectedIndex = index),
+            currentIndex: selectedIndex,
+            items: const <BottomNavigationBarItem>[
+              BottomNavigationBarItem(
+               backgroundColor: Colors.black54,
+               icon: Icon(Icons.location_searching),
+               title: Text('Nearby')
+             ),
+             BottomNavigationBarItem(
+               backgroundColor: Colors.black54,
+               icon: Icon(Icons.search),
+               title: Text('Search')
+             ),
+
+             BottomNavigationBarItem(
+               backgroundColor: Colors.black54,
+               icon: Icon(Icons.star_border),
+               title: Text('Bookmarks')
+             ),
+              BottomNavigationBarItem(
+                backgroundColor: Colors.black54,
+               icon: Icon(Icons.settings),
+               title: Text('Settings')
+
+             )
+            ],
+          );
 
 
 
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-        actions: <Widget>[
-          IconButton(icon: Icon(Icons.search), onPressed: () {
-            showSearch(context: context, delegate: DataSearch());
-          })
-        ],
-      ),
-      bottomNavigationBar: _bottomNavigationBar(_selectedIndex),
-      body: PageStorage(
-        child: pages[_selectedIndex],
-        bucket: bucket,
-      ),
-    );
-  }
+      Widget build(BuildContext context) {
+        return Scaffold(
+          appBar: AppBar(
+            title: Text(widget.title),
+            actions: <Widget>[
+              IconButton(icon: Icon(Icons.search), onPressed: () {
+                showSearch(context: context, delegate: DataSearch());
+              })
+            ],
+          ),
+          bottomNavigationBar: _bottomNavigationBar(_selectedIndex),
+          body: PageStorage(
+            child: pages[_selectedIndex],
+            bucket: bucket,
+          ),
+        );
+      }
+    }
+
+    class Search {
 }
 
 
@@ -88,7 +117,7 @@ class DataSearch extends SearchDelegate<String>{
     // TODO: implement buildSuggestions
 
     final suggestionsList = query.isEmpty?places:places.where((p)=> p.startsWith(query)).toList();
-    
+
     return ListView.builder(itemBuilder: (context, index) =>
       ListTile(
         leading: Icon(Icons.location_city),
