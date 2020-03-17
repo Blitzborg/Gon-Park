@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:parkapp/views/page1.dart';
+import 'package:parkapp/views/page2.dart';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
@@ -11,6 +13,31 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   @override
+  final List<Widget> pages = [
+    FirstPage(
+      key: PageStorageKey('Page1'),
+    ),
+    SecondPage(
+      key: PageStorageKey('Page2'),
+    ),
+  ];
+  final PageStorageBucket bucket = PageStorageBucket();
+  int _selectedIndex = 0;
+
+
+  Widget _bottomNavigationBar(int selectedIndex) => BottomNavigationBar(
+        onTap: (int index) => setState(() => _selectedIndex = index),
+        currentIndex: selectedIndex,
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+              icon: Icon(Icons.add), title: Text('First Page')),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.list), title: Text('Second Page')),
+        ],
+      );
+
+
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -21,45 +48,17 @@ class _MyHomePageState extends State<MyHomePage> {
           })
         ],
       ),
-      body: Center(
-        
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            // Text(
-            //   '$_counter',
-            //   style: Theme.of(context).textTheme.display1,
-            // ),
-          ],
-        ),
+      bottomNavigationBar: _bottomNavigationBar(_selectedIndex),
+      body: PageStorage(
+        child: pages[_selectedIndex],
+        bucket: bucket,
       ),
-      bottomNavigationBar: BottomNavigationBar(
-       currentIndex: 0, // this will be set when a new tab is tapped
-       items: [
-         BottomNavigationBarItem(
-           icon: new Icon(Icons.home),
-           title: new Text('Home'),
-         ),
-         BottomNavigationBarItem(
-           icon: new Icon(Icons.mail),
-           title: new Text('Messages'),
-         ),
-         BottomNavigationBarItem(
-           icon: Icon(Icons.person),
-           title: Text('Profile')
-         )
-       ],
-     ),
     );
   }
 }
 
 
 class DataSearch extends SearchDelegate<String>{
-
   final  places = ['jurong east',
   'buano vista',
   'boon lay'];
@@ -70,7 +69,6 @@ class DataSearch extends SearchDelegate<String>{
       query = "";
     })];
   }
-
   @override
   Widget buildLeading(BuildContext context) {
     // TODO: implement buildLeading
@@ -85,7 +83,6 @@ class DataSearch extends SearchDelegate<String>{
     // TODO: implement buildResults
     return null;
   }
-
   @override
   Widget buildSuggestions(BuildContext context) {
     // TODO: implement buildSuggestions
