@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-
+import 'package:parkapp/views/Nearby.dart';
+import 'package:parkapp/views/Bookmarks.dart';
+import 'package:parkapp/views/SearchPage.dart';
+import 'package:parkapp/views/SettingsPage.dart';
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
 
@@ -11,55 +14,79 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-        actions: <Widget>[
-          IconButton(icon: Icon(Icons.search), onPressed: () {
-            showSearch(context: context, delegate: DataSearch());
-          })
-        ],
-      ),
-      body: Center(
-        
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            // Text(
-            //   '$_counter',
-            //   style: Theme.of(context).textTheme.display1,
-            // ),
-          ],
+  final List<Widget> pages = [
+    Nearby(
+          key: PageStorageKey('Nearby'),
         ),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-       currentIndex: 0, // this will be set when a new tab is tapped
-       items: [
-         BottomNavigationBarItem(
-           icon: new Icon(Icons.home),
-           title: new Text('Home'),
-         ),
-         BottomNavigationBarItem(
-           icon: new Icon(Icons.mail),
-           title: new Text('Messages'),
-         ),
-         BottomNavigationBarItem(
-           icon: Icon(Icons.person),
-           title: Text('Profile')
-         )
-       ],
-     ),
-    );
-  }
+    SearchPage(
+          key: PageStorageKey('Search'),
+        ),
+    Bookmarks(
+          key: PageStorageKey('Bookmarks'),
+        ),
+    SettingsPage(
+      key: PageStorageKey('Settings'),
+    ),
+      ];
+      final PageStorageBucket bucket = PageStorageBucket();
+      int _selectedIndex = 0;
+    
+    
+      Widget _bottomNavigationBar(int selectedIndex) => BottomNavigationBar(
+            onTap: (int index) => setState(() => _selectedIndex = index),
+            currentIndex: selectedIndex,
+            items: const <BottomNavigationBarItem>[
+              BottomNavigationBarItem(
+               backgroundColor: Colors.black54,
+               icon: Icon(Icons.location_searching),
+               title: Text('Nearby')
+             ),
+             BottomNavigationBarItem(
+               backgroundColor: Colors.black54,
+               icon: Icon(Icons.search),
+               title: Text('Search')
+             ),
+             
+             BottomNavigationBarItem(
+               backgroundColor: Colors.black54,
+               icon: Icon(Icons.star_border),
+               title: Text('Bookmarks')
+             ),
+              BottomNavigationBarItem(
+                backgroundColor: Colors.black54,
+               icon: Icon(Icons.settings),
+               title: Text('Settings')
+               
+             )
+            ],
+          );
+             
+    
+    
+      Widget build(BuildContext context) {
+        return Scaffold(
+          appBar: AppBar(
+            title: Text(widget.title),
+            actions: <Widget>[
+              IconButton(icon: Icon(Icons.search), onPressed: () {
+                showSearch(context: context, delegate: DataSearch());
+              })
+            ],
+          ),
+          bottomNavigationBar: _bottomNavigationBar(_selectedIndex),
+          body: PageStorage(
+            child: pages[_selectedIndex],
+            bucket: bucket,
+          ),
+        );
+      }
+    }
+    
+    class Search {
 }
 
 
 class DataSearch extends SearchDelegate<String>{
-
   final  places = ['jurong east',
   'buano vista',
   'boon lay'];
@@ -70,7 +97,6 @@ class DataSearch extends SearchDelegate<String>{
       query = "";
     })];
   }
-
   @override
   Widget buildLeading(BuildContext context) {
     // TODO: implement buildLeading
@@ -85,7 +111,6 @@ class DataSearch extends SearchDelegate<String>{
     // TODO: implement buildResults
     return null;
   }
-
   @override
   Widget buildSuggestions(BuildContext context) {
     // TODO: implement buildSuggestions
