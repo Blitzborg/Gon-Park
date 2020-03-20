@@ -81,6 +81,7 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+<<<<<<< HEAD
   geolocator:
     dependency: "direct main"
     description:
@@ -102,6 +103,8 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.4.0"
+=======
+>>>>>>> parent of 27fd3b6... map included
   image:
     dependency: transitive
     description:
@@ -248,5 +251,9 @@ packages:
     source: hosted
     version: "3.5.0"
 sdks:
+<<<<<<< HEAD
   dart: ">=2.7.0 <3.0.0"
   flutter: ">=1.12.8 <2.0.0"
+=======
+  dart: ">=2.4.0 <3.0.0"
+>>>>>>> parent of 27fd3b6... map included

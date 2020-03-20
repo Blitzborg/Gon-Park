@@ -83,6 +83,10 @@ class _MyHomePageState extends State<MyHomePage> {
       }
     }
 
+    class Search {
+}
+
+
 class DataSearch extends SearchDelegate<String>{
   final  places = ['jurong east',
   'buano vista',
