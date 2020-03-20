@@ -74,6 +74,16 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+<<<<<<< HEAD
+=======
+  google_maps_flutter:
+    dependency: "direct main"
+    description:
+      name: google_maps_flutter
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.4.0"
+>>>>>>> parent of cd69335... with map-2
   image:
     dependency: transitive
     description:
@@ -193,3 +203,7 @@ packages:
     version: "3.5.0"
 sdks:
   dart: ">=2.4.0 <3.0.0"
+<<<<<<< HEAD
+=======
+  flutter: ">=0.11.9 <2.0.0"
+>>>>>>> parent of cd69335... with map-2
