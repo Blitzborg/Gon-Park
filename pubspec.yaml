@@ -27,9 +27,12 @@ dependencies:
   cupertino_icons: ^0.1.2
 <<<<<<< HEAD
   google_maps_flutter: ^0.4.0
+<<<<<<< HEAD
   geolocator: ^5.3.0
 =======
 >>>>>>> parent of 27fd3b6... map included
+=======
+>>>>>>> parent of cd69335... with map-2
 
 dev_dependencies:
   flutter_test:
