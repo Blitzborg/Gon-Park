@@ -1,44 +1,56 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-
 class SettingsPage extends StatelessWidget{
-   const SettingsPage({Key key}) : super(key: key);
+  const SettingsPage({Key key}) : super(key: key);
+
   @override
-  Widget build(BuildContext cntxt){
+  Widget build(BuildContext cntxt) {
     return Scaffold(
-        appBar: AppBar(title: Text('Settings')),
-        body: BodyLayout(),
-      );
+      appBar: AppBar(title: Text('Settings')),
+      body: BodyLayout(),
+    );
   }
 
 }
-   class BodyLayout extends StatelessWidget {
-      @override
-      Widget build(BuildContext context) {
-        return _myListView(context);
-      }
-    }
-    Widget _myListView(BuildContext context) {
 
-      final titles = ['FeedBack', 'Suggest a Feature','Contact Us', 'Rate Us','About this App'];
+class BodyLayout extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return _myListView(context);
+  }
+}
 
-      final icons = [Icons.insert_comment,Icons.supervisor_account,Icons.local_phone, Icons.rate_review,Icons.info ];
+Widget _myListView(BuildContext context) {
+  final titles = [
+    'FeedBack',
+    'Suggest a Feature',
+    'Contact Us',
+    'Rate Us',
+    'About this App'
+  ];
 
-      return ListView.builder(
-        itemCount: titles.length,
-        itemBuilder: (context, index) {
-          return Card( //                           <-- Card widget
-            child: ListTile(
-              onTap: () {
-                print('tapped');
-              },
-              leading: Icon(icons[index]),
-              title: Text(titles[index]),
-              trailing: Icon(Icons.keyboard_arrow_right),
-            ),
-          );
-        },
+  final icons = [
+    Icons.insert_comment,
+    Icons.supervisor_account,
+    Icons.local_phone,
+    Icons.rate_review,
+    Icons.info
+  ];
+
+  return ListView.builder(
+    itemCount: titles.length,
+    itemBuilder: (context, index) {
+      return Card( //                           <-- Card widget
+        child: ListTile(
+          onTap: () {
+            print('tapped');
+          },
+          leading: Icon(icons[index]),
+          title: Text(titles[index]),
+          trailing: Icon(Icons.keyboard_arrow_right),
+        ),
       );
-    }
+    },
+  );
+}
