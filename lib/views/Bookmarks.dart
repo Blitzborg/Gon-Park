@@ -7,6 +7,7 @@ class Bookmarks extends StatelessWidget{
   @override
   Widget build(BuildContext cntxt){
     return Scaffold(
+<<<<<<< HEAD
         appBar: AppBar(title: Text('Bookmarked Places')),
         body: BodyLayout(),
     );
@@ -42,3 +43,11 @@ class BodyLayout extends StatelessWidget {
       );
     }
 
+=======
+      body: Center(
+          child: Text('Bookmarks Page'),
+        ),
+    );
+  }
+}
+>>>>>>> parent of c399f79... Merge branch 'Rohan-Branch' into LIZI

@@ -75,6 +75,7 @@ packages:
     source: sdk
     version: "0.0.0"
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
   google_maps_flutter:
     dependency: "direct main"
@@ -84,6 +85,8 @@ packages:
     source: hosted
     version: "0.4.0"
 >>>>>>> parent of cd69335... with map-2
+=======
+>>>>>>> parent of c399f79... Merge branch 'Rohan-Branch' into LIZI
   image:
     dependency: transitive
     description:
@@ -204,6 +207,9 @@ packages:
 sdks:
   dart: ">=2.4.0 <3.0.0"
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
   flutter: ">=0.11.9 <2.0.0"
 >>>>>>> parent of cd69335... with map-2
+=======
+>>>>>>> parent of c399f79... Merge branch 'Rohan-Branch' into LIZI

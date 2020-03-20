@@ -25,13 +25,17 @@ class _MyAppState extends State<Nearby> {
   Widget build(BuildContext cntxt){
     return Scaffold(
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> parent of c399f79... Merge branch 'Rohan-Branch' into LIZI
       body: Center(
           child: Text('Nearby Locations Page'),
         ),
     );
   }
 
+<<<<<<< HEAD
 =======
         body: GoogleMap(
           onMapCreated: _onMapCreated,
@@ -44,3 +48,6 @@ class _MyAppState extends State<Nearby> {
   }
 >>>>>>> parent of cd69335... with map-2
 }
+=======
+}
+>>>>>>> parent of c399f79... Merge branch 'Rohan-Branch' into LIZI
