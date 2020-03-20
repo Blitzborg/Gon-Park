@@ -26,6 +26,7 @@ class _MyAppState extends State<Nearby> {
     return Scaffold(
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
       body: Center(
           child: Text('Nearby Locations Page'),
         ),
@@ -33,6 +34,18 @@ class _MyAppState extends State<Nearby> {
   }
 
 }
+=======
+        body: GoogleMap(
+          onMapCreated: _onMapCreated,
+          initialCameraPosition: CameraPosition(
+            target: _center,
+            zoom: 11.0,
+          ),
+        ),
+      );
+  }
+}
+>>>>>>> parent of cd69335... with map-2
 =======
         body: GoogleMap(
           onMapCreated: _onMapCreated,
