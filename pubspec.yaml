@@ -23,14 +23,7 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
-<<<<<<< HEAD
-<<<<<<< HEAD
- 
-=======
-  google_maps_flutter: ^0.4.0
->>>>>>> parent of cd69335... with map-2
-=======
->>>>>>> parent of c399f79... Merge branch 'Rohan-Branch' into LIZI
+
 
 dev_dependencies:
   flutter_test:
