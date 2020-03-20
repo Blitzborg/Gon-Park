@@ -31,8 +31,8 @@ class _MyHomePageState extends State<MyHomePage> {
       ];
       final PageStorageBucket bucket = PageStorageBucket();
       int _selectedIndex = 0;
-
-
+    
+    
       Widget _bottomNavigationBar(int selectedIndex) => BottomNavigationBar(
             onTap: (int index) => setState(() => _selectedIndex = index),
             currentIndex: selectedIndex,
@@ -47,7 +47,7 @@ class _MyHomePageState extends State<MyHomePage> {
                icon: Icon(Icons.search),
                title: Text('Search')
              ),
-
+             
              BottomNavigationBarItem(
                backgroundColor: Colors.black54,
                icon: Icon(Icons.star_border),
@@ -57,13 +57,13 @@ class _MyHomePageState extends State<MyHomePage> {
                 backgroundColor: Colors.black54,
                icon: Icon(Icons.settings),
                title: Text('Settings')
-
+               
              )
             ],
           );
-
-
-
+             
+    
+    
       Widget build(BuildContext context) {
         return Scaffold(
           appBar: AppBar(
@@ -82,6 +82,10 @@ class _MyHomePageState extends State<MyHomePage> {
         );
       }
     }
+    
+    class Search {
+}
+
 
     class Search {
 }
@@ -117,7 +121,7 @@ class DataSearch extends SearchDelegate<String>{
     // TODO: implement buildSuggestions
 
     final suggestionsList = query.isEmpty?places:places.where((p)=> p.startsWith(query)).toList();
-
+    
     return ListView.builder(itemBuilder: (context, index) =>
       ListTile(
         leading: Icon(Icons.location_city),
