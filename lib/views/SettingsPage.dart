@@ -33,7 +33,7 @@ class SettingsPage extends StatelessWidget{
           else if (index == 2)
             {Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context)=> new ContactPage()));} 
           else if (index == 3)
-            {Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context)=> new RatePage()));}  
+            {Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context)=> new Rate()));}  
           else if (index == 4)
             {Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context)=> new AboutPage()));}   
       }
