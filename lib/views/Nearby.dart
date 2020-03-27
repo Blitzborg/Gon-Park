@@ -15,7 +15,7 @@ final Map<String, Marker> _markers = {};
 
 class _MyAppState extends State<Nearby> {
   Completer<GoogleMapController> _controller = Completer();
-  GoogleMapController mapcontroller;
+  GoogleMapController mapcontroller; //MINE?
   static const LatLng _center = const LatLng(1.290270, 103.851959);
 
   void _onMapCreated(GoogleMapController controller) {
@@ -47,6 +47,9 @@ class _MyAppState extends State<Nearby> {
     var currentLocation = await Geolocator()
         .getCurrentPosition(desiredAccuracy: LocationAccuracy.best);
     print(currentLocation.toString());
+
+    CameraUpdate cameraUpdate=CameraUpdate.newLatLngZoom(LatLng(currentLocation.latitude, currentLocation.longitude), 15);
+    mapcontroller.animateCamera(cameraUpdate);
 
     setState(() {
       _markers.clear();
