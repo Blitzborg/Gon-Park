@@ -38,7 +38,6 @@ class SettingsPage extends StatelessWidget{
           {Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context)=> new AboutPage()));}   
     }
       final titles = ['FeedBack', 'Suggest a Feature','Contact Us', 'Rate Us','About this App'];
-      final pagenames = ['new AboutPage()'];
       final icons = [Icons.insert_comment,Icons.supervisor_account,Icons.local_phone, Icons.rate_review,Icons.info ];
 
       return ListView.builder(
