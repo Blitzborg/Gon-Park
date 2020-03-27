@@ -1,18 +1,15 @@
-class Rate extends StatelessWidget {
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+
+class RatePage extends StatelessWidget{
+   const RatePage({Key key}) : super(key: key);
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext cntxt){
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Rate Us!"),
-      ),
       body: Center(
-        child: RaisedButton(
-          onPressed: () {
-            // Navigate back to first route when tapped.
-          },
-          child: Text('Go back!'),
+          child: Text('Rate and Review'),
         ),
-      ),
     );
   }
+
 }

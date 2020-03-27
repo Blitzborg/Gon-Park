@@ -1,6 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import './Settings/About.dart';
+import './Settings/Contact.dart';
+import './Settings/Rate.dart';
+import './Settings/FeedBack.dart';
+import './Settings/Suggest.dart';
 
 class SettingsPage extends StatelessWidget{
    const SettingsPage({Key key}) : super(key: key);
@@ -22,7 +26,7 @@ class SettingsPage extends StatelessWidget{
     Widget _myListView(BuildContext context) {
 
       final titles = ['FeedBack', 'Suggest a Feature','Contact Us', 'Rate Us','About this App'];
-
+      final pagenames = ['AboutPage()'];
       final icons = [Icons.insert_comment,Icons.supervisor_account,Icons.local_phone, Icons.rate_review,Icons.info ];
 
       return ListView.builder(
@@ -30,12 +34,11 @@ class SettingsPage extends StatelessWidget{
         itemBuilder: (context, index) {
           return Card( //                           <-- Card widget
             child: ListTile(
-              onTap: () {
-                print(index);
-              },
+              onTap: () {Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context)=> new AboutPage()));} ,
               leading: Icon(icons[index]),
               title: Text(titles[index]),
               trailing: Icon(Icons.keyboard_arrow_right),
+
             ),
           );
         },
