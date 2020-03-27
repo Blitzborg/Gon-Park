@@ -15,6 +15,7 @@ final Map<String, Marker> _markers = {};
 
 class _MyAppState extends State<Nearby> {
   Completer<GoogleMapController> _controller = Completer();
+  GoogleMapController mapcontroller;
   static const LatLng _center = const LatLng(1.290270, 103.851959);
 
   void _onMapCreated(GoogleMapController controller) {
