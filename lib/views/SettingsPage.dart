@@ -31,7 +31,7 @@ class SettingsPage extends StatelessWidget{
           return Card( //                           <-- Card widget
             child: ListTile(
               onTap: () {
-                print('tapped');
+                print(index);
               },
               leading: Icon(icons[index]),
               title: Text(titles[index]),
