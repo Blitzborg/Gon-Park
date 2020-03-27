@@ -3,15 +3,10 @@ class Rate extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Rate Us!"),
+        title: Text("Rate and Review"),
       ),
       body: Center(
-        child: RaisedButton(
-          onPressed: () {
-            // Navigate back to first route when tapped.
-          },
-          child: Text('Go back!'),
-        ),
+        child: Text("To Rate and Review our app:\n\nEmail us at: abcde@e.ntu.edu.sg \n\nCall us at: +65 12345678")
       ),
     );
   }
