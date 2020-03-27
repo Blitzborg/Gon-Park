@@ -1,3 +1,5 @@
+<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.parkapp">
     <!-- io.flutter.app.FlutterApplication is an android.app.Application that
