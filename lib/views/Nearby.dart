@@ -60,9 +60,6 @@ class _MyAppState extends State<Nearby> {
         .getCurrentPosition(desiredAccuracy: LocationAccuracy.best);
     print(currentLocation.toString());
 
-    CameraUpdate cameraUpdate=CameraUpdate.newLatLngZoom(LatLng(currentLocation.latitude, currentLocation.longitude), 15);
-    mapcontroller.animateCamera(cameraUpdate);
-
     setState(() {
       _markers.clear();
       final marker = Marker(
