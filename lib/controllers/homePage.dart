@@ -66,14 +66,7 @@ class _MyHomePageState extends State<MyHomePage> {
     
       Widget build(BuildContext context) {
         return Scaffold(
-          appBar: AppBar(
-            title: Text(widget.title),
-            actions: <Widget>[
-              IconButton(icon: Icon(Icons.search), onPressed: () {
-                showSearch(context: context, delegate: DataSearch());
-              })
-            ],
-          ),
+  
           bottomNavigationBar: _bottomNavigationBar(_selectedIndex),
           body: PageStorage(
             child: pages[_selectedIndex],
