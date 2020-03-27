@@ -27,6 +27,7 @@ class BookmarkListState extends State<Bookmarks> {
     }
 
     return Scaffold(
+      appBar: AppBar(title: Text("Favourites")),
       body: getNoteListView(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
