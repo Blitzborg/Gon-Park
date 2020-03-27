@@ -26,7 +26,7 @@ class SettingsPage extends StatelessWidget{
     Widget _myListView(BuildContext context) {
 
       final titles = ['FeedBack', 'Suggest a Feature','Contact Us', 'Rate Us','About this App'];
-      final pagenames = ['AboutPage()'];
+      final pagenames = ['AboutPage()','ContentPage()'];
       final icons = [Icons.insert_comment,Icons.supervisor_account,Icons.local_phone, Icons.rate_review,Icons.info ];
 
       return ListView.builder(
@@ -34,7 +34,7 @@ class SettingsPage extends StatelessWidget{
         itemBuilder: (context, index) {
           return Card( //                           <-- Card widget
             child: ListTile(
-              onTap: () {Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context)=> new AboutPage()));} ,
+              onTap: () {Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context)=> new RatePage()));} ,
               leading: Icon(icons[index]),
               title: Text(titles[index]),
               trailing: Icon(Icons.keyboard_arrow_right),
