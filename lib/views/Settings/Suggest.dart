@@ -4,12 +4,14 @@ import 'package:flutter/material.dart';
 class SuggestPage extends StatelessWidget{
    const SuggestPage({Key key}) : super(key: key);
   @override
-  Widget build(BuildContext cntxt){
+  Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("About Page"),
+      ),
       body: Center(
-          child: Text('Search a Feature'),
-        ),
+        child: Text("This app ")
+      ),
     );
   }
-
 }

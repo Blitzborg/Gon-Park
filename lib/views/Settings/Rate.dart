@@ -4,12 +4,14 @@ import 'package:flutter/material.dart';
 class RatePage extends StatelessWidget{
    const RatePage({Key key}) : super(key: key);
   @override
-  Widget build(BuildContext cntxt){
+  Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("About Page"),
+      ),
       body: Center(
-          child: Text('Rate and Review'),
-        ),
+        child: Text("This app ")
+      ),
     );
   }
-
 }
