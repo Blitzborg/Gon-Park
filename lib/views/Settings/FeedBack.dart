@@ -7,10 +7,10 @@ class FeedbackPage extends StatelessWidget{
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("About Page"),
+        title: Text("Feedback"),
       ),
       body: Center(
-        child: Text("This app ")
+        child: Text("For Feedback:\n\nEmail us at: abcde@e.ntu.edu.sg \n\nCall us at: +65 12345678")
       ),
     );
   }

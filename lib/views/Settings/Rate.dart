@@ -7,10 +7,10 @@ class RatePage extends StatelessWidget{
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("About Page"),
+        title: Text("Rate and Review"),
       ),
       body: Center(
-        child: Text("This app ")
+        child: Text("To Rate and Review our app:\n\nEmail us at: abcde@e.ntu.edu.sg \n\nCall us at: +65 12345678")
       ),
     );
   }

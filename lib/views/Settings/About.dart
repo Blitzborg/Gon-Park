@@ -10,7 +10,7 @@ class AboutPage extends StatelessWidget {
         title: Text("About Page"),
       ),
       body: Center(
-        child: Text("This app ")
+        child: Text("This app was created by Computer Engineering \nstudents of Nanyang Technological University \nas a part of the Software Enginerering project.")
       ),
     );
   }
