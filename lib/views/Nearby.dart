@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 
 class Nearby extends StatelessWidget{
    const Nearby({Key key}) : super(key: key);
+
+   @override
+
   @override
   Widget build(BuildContext cntxt){
     return Scaffold(
