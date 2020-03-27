@@ -24,21 +24,20 @@ class SettingsPage extends StatelessWidget{
       }
     }
     Widget _myListView(BuildContext context) {
-              void PageCall(int index)
-    {
-        if (index == 0)
-          {Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context)=> new FeedbackPage()));} 
-        else if (index == 1)
-          {Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context)=> new SuggestPage()));} 
-        else if (index == 2)
-          {Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context)=> new ContactPage()));} 
-        else if (index == 3)
-          {Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context)=> new RatePage()));}  
-        else if (index == 4)
-          {Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context)=> new AboutPage()));}   
-    }
+      void pageCall(int index)
+      {
+          if (index == 0)
+            {Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context)=> new FeedbackPage()));} 
+          else if (index == 1)
+            {Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context)=> new SuggestPage()));} 
+          else if (index == 2)
+            {Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context)=> new ContactPage()));} 
+          else if (index == 3)
+            {Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context)=> new RatePage()));}  
+          else if (index == 4)
+            {Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context)=> new AboutPage()));}   
+      }
       final titles = ['FeedBack', 'Suggest a Feature','Contact Us', 'Rate Us','About this App'];
-      final pagenames = ['new AboutPage()'];
       final icons = [Icons.insert_comment,Icons.supervisor_account,Icons.local_phone, Icons.rate_review,Icons.info ];
 
       return ListView.builder(
@@ -49,7 +48,7 @@ class SettingsPage extends StatelessWidget{
               leading: Icon(icons[index]),
               title: Text(titles[index]),
               trailing: Icon(Icons.keyboard_arrow_right),
-               onTap: () => PageCall(index) ,
+               onTap: () => pageCall(index) ,
             ),
           );
         },
