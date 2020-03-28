@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
@@ -9,69 +8,65 @@ class Nearby extends StatefulWidget {
   MyAppState createState() => MyAppState();
 }
 
-final Map<String, Marker> _markers = {};
-
 class MyAppState extends State<Nearby> {
-  GoogleMapController mapController;
+  GoogleMapController _controller;
   Position userLocation;
-  Geolocator geolocator = Geolocator();
+  Widget _body;
 
   @override
   void initState() {
+    _body = Center(child: CircularProgressIndicator());
+    getCurrentLocation();
     super.initState();
-    _getLocation().then((position) {
-      userLocation = position;
+  }
+
+  void getCurrentLocation() async {
+    Position temp = await Geolocator().getCurrentPosition();
+    setState(() {
+      userLocation = temp;
+      _body = mapWidget();
     });
   }
 
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Home"),
-        actions: <Widget>[
-          IconButton(
-            icon: const Icon(Icons.search),
-            tooltip: 'Search',
-            onPressed: () {
-              print("Search");
-            },
-          )
-        ],
-      ),
-      body: GoogleMap(
-        onMapCreated: (GoogleMapController controller) {
-          mapController = controller;
-        },
-        initialCameraPosition: CameraPosition(
-          target: LatLng(1.3521, 103.8198),
-          zoom: 11.0,
+        appBar: AppBar(
+          title: Text("Home"),
+          actions: <Widget>[
+            IconButton(
+              icon: const Icon(Icons.search),
+              tooltip: 'Search',
+              onPressed: () {
+                print("Search");
+              },
+            )
+          ],
         ),
+        body: _body);
+  }
+
+  Widget mapWidget() {
+    return GoogleMap(
+      markers: _createMarker(),
+      myLocationEnabled: true,
+      initialCameraPosition: CameraPosition(
+        target: LatLng(userLocation.latitude, userLocation.longitude),
+        zoom: 18,
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          userLocation == null
-              ? CircularProgressIndicator()
-              : mapController.animateCamera(CameraUpdate.newCameraPosition(
-                  CameraPosition(
-                      target:
-                          LatLng(userLocation.latitude, userLocation.longitude),
-                      zoom: 15.0),
-                ));
-        },
-        tooltip: 'Get Location',
-        child: Icon(Icons.location_searching),
-      ),
+      onMapCreated: (GoogleMapController controller) {
+        _controller = controller;
+      },
     );
   }
 
-  Future<Position> _getLocation() async {
-    var currentLocation;
-    try {
-      currentLocation = await geolocator.getCurrentPosition(
-          desiredAccuracy: LocationAccuracy.best);
-    } catch (e) {
-      currentLocation = null;
-    }
-    return currentLocation;
+  Set<Marker> _createMarker() {
+    return <Marker>[
+      Marker(
+        markerId: MarkerId("CurrentPosition"),
+        position: LatLng(userLocation.latitude, userLocation.longitude),
+        icon: BitmapDescriptor.defaultMarker,
+        infoWindow: InfoWindow(title: 'WTF!!!!!!'),
+      )
+    ].toSet();
   }
 }
