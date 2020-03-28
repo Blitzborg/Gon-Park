@@ -4,12 +4,24 @@ class SettingsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text('More')),
+        appBar: AppBar(
+          title: Text('Settings'),
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(Icons.search),
+              tooltip: 'Search',
+              onPressed: () {
+                print("Search");
+              },
+            )
+          ],
+        ),
         body: ListView(children: <Widget>[
-          ExpansionTile(
+          Card(
+              child: ExpansionTile(
             title: Text(
               'Contacts',
-              style: TextStyle(fontSize: 18),
+              style: TextStyle(fontSize: 18, color: Colors.black),
             ),
             children: <Widget>[
               Padding(
@@ -20,39 +32,40 @@ class SettingsPage extends StatelessWidget {
                   children: <Widget>[
                     Text(
                       "To contact us:",
-                      style: TextStyle(fontSize: 16),
+                      style: TextStyle(fontSize: 16, color: Colors.black54),
                     ),
                     Text(
-                      "Email: ",
-                      style: TextStyle(fontSize: 16),
+                      "Email: apple_plus@gmail.com",
+                      style: TextStyle(fontSize: 16, color: Colors.black54),
                     ),
                     Text(
-                      "Mobile:",
-                      style: TextStyle(fontSize: 16),
+                      "Mobile: +65 xxxx-xxxx",
+                      style: TextStyle(fontSize: 16, color: Colors.black54),
                     ),
                   ],
                 ),
               ),
             ],
-          ),
-          ExpansionTile(
-              title: Text(
-                'About',
-                style: TextStyle(fontSize: 18),
-              ),
-              children: <Widget>[
+          )),
+          Card(
+              child: ExpansionTile(
+                  title: Text(
+                    'About',
+                    style: TextStyle(fontSize: 18, color: Colors.black),
+                  ),
+                  children: <Widget>[
                 Padding(
                   padding: const EdgeInsets.only(left: 16.0, bottom: 16.0),
                   child: Column(
                     children: <Widget>[
                       Text(
                         "This app was created by Computer Engineering students of Nanyang Technological University as a part of the Software Enginerering project.",
-                        style: TextStyle(fontSize: 16),
+                        style: TextStyle(fontSize: 16, color: Colors.black54),
                       ),
                     ],
                   ),
                 ),
-              ])
+              ]))
         ]));
   }
 }
