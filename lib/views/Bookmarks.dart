@@ -7,7 +7,6 @@ import 'package:parkapp/utils/database_helper.dart';
 
 
 class Bookmarks extends StatefulWidget {
-  const Bookmarks({Key key}) : super(key: key);
   @override
   State<StatefulWidget> createState() {
     return BookmarkListState();

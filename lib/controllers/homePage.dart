@@ -14,15 +14,9 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   final List<Widget> pages = [
-    Nearby(
-      key: PageStorageKey('Home'),
-    ),
-    Bookmarks(
-      key: PageStorageKey('Bookmarks'),
-    ),
-    SettingsPage(
-      key: PageStorageKey('Settings'),
-    ),
+    Nearby(),
+    Bookmarks(),
+    SettingsPage(),
   ];
   final PageStorageBucket bucket = PageStorageBucket();
   int _selectedIndex = 0;
