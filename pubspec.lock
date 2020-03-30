@@ -81,11 +81,26 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+<<<<<<< HEAD
+=======
+<<<<<<< Updated upstream
+=======
+>>>>>>> origin/jaswanth
   flutter_web_plugins:
     dependency: transitive
     description: flutter
     source: sdk
     version: "0.0.0"
+<<<<<<< HEAD
+=======
+  geolocation:
+    dependency: "direct main"
+    description:
+      name: geolocation
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.1.2"
+>>>>>>> origin/jaswanth
   geolocator:
     dependency: "direct main"
     description:
@@ -107,6 +122,16 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.4.0"
+<<<<<<< HEAD
+=======
+  http:
+    dependency: "direct main"
+    description:
+      name: http
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.12.0+4"
+>>>>>>> origin/jaswanth
   http_parser:
     dependency: transitive
     description:
@@ -114,6 +139,10 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.1.4"
+<<<<<<< HEAD
+=======
+>>>>>>> Stashed changes
+>>>>>>> origin/jaswanth
   image:
     dependency: transitive
     description:
@@ -171,7 +200,7 @@ packages:
     source: hosted
     version: "1.1.8"
   path:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: path
       url: "https://pub.dartlang.org"
@@ -212,6 +241,11 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.4.0"
+<<<<<<< HEAD
+=======
+<<<<<<< Updated upstream
+=======
+>>>>>>> origin/jaswanth
   platform:
     dependency: transitive
     description:
@@ -226,6 +260,10 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.2"
+<<<<<<< HEAD
+=======
+>>>>>>> Stashed changes
+>>>>>>> origin/jaswanth
   quiver:
     dependency: transitive
     description:
@@ -323,5 +361,14 @@ packages:
     source: hosted
     version: "3.5.0"
 sdks:
+<<<<<<< HEAD
   dart: ">=2.7.0 <3.0.0"
   flutter: ">=1.12.13+hotfix.5 <2.0.0"
+=======
+<<<<<<< Updated upstream
+  dart: ">=2.4.0 <3.0.0"
+=======
+  dart: ">=2.7.0 <3.0.0"
+  flutter: ">=1.12.13+hotfix.5 <2.0.0"
+>>>>>>> Stashed changes
+>>>>>>> origin/jaswanth
