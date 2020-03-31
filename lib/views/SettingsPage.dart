@@ -6,15 +6,6 @@ class SettingsPage extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           title: Text('Settings'),
-          actions: <Widget>[
-            IconButton(
-              icon: Icon(Icons.search),
-              tooltip: 'Search',
-              onPressed: () {
-                print("Search");
-              },
-            )
-          ],
         ),
         body: ListView(children: <Widget>[
           Card(

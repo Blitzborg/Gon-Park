@@ -27,16 +27,7 @@ class BookmarkListState extends State<Bookmarks> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Settings'),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.search),
-            tooltip: 'Search',
-            onPressed: () {
-              print("Search");
-            },
-          )
-        ],
+        title: Text('Bookmarks'),
       ),
       body: getNoteListView(),
       floatingActionButton: FloatingActionButton(
