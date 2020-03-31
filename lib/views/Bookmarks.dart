@@ -1,10 +1,11 @@
 import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:parkapp/models/car_park.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:parkapp/models/bookmark.dart';
 import 'package:parkapp/utils/database_helper.dart';
 
+import 'Nearby.dart';
 
 class Bookmarks extends StatefulWidget {
   @override
@@ -15,13 +16,13 @@ class Bookmarks extends StatefulWidget {
 
 class BookmarkListState extends State<Bookmarks> {
   DatabaseHelper databaseHelper = DatabaseHelper();
-  List<Bookmark> bookmarkList;
+  List<CarPark> carparkList;
   int count = 0;
 
   @override
   Widget build(BuildContext context) {
-    if (bookmarkList == null) {
-      bookmarkList = List<Bookmark>();
+    if (carparkList == null) {
+      carparkList = List<CarPark>();
       updateListView();
     }
 
@@ -32,12 +33,10 @@ class BookmarkListState extends State<Bookmarks> {
       body: getNoteListView(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          debugPrint('FAB clicked');
+          //print(this.carparkList.length);
           insertInit();
           updateListView();
         },
-        tooltip: 'Add Note',
-        child: Icon(Icons.add),
       ),
     );
   }
@@ -54,7 +53,7 @@ class BookmarkListState extends State<Bookmarks> {
           child: ListTile(
             leading: Icon(Icons.location_on),
             title: Text(
-              this.bookmarkList[position].LocationName,
+              this.carparkList[position].address,
               style: titleStyle,
             ),
             trailing: GestureDetector(
@@ -63,11 +62,11 @@ class BookmarkListState extends State<Bookmarks> {
                 color: Colors.grey,
               ),
               onTap: () {
-                _delete(context, bookmarkList[position]);
+                _delete(context, carparkList[position]);
               },
             ),
             onTap: () {
-              debugPrint("ListTile Tapped");
+
             },
           ),
         );
@@ -75,10 +74,10 @@ class BookmarkListState extends State<Bookmarks> {
     );
   }
 
-  void _delete(BuildContext context, Bookmark bookmark) async {
-    int result = await databaseHelper.deleteBookmark(bookmark.LocationID);
+  void _delete(BuildContext context, CarPark carpark) async {
+    int result = await databaseHelper.deleteCarpark(carpark.number);
     if (result != 0) {
-      _showSnackBar(context, 'Note Deleted Successfully');
+      _showSnackBar(context, 'Bookmark Deleted Successfully');
       updateListView();
     }
   }
@@ -91,19 +90,20 @@ class BookmarkListState extends State<Bookmarks> {
   void updateListView() {
     final Future<Database> dbFuture = databaseHelper.initializeDatabase();
     dbFuture.then((database) {
-      Future<List<Bookmark>> noteListFuture = databaseHelper.getBookmarkList();
-      noteListFuture.then((bookmarkList) {
+      Future<List<CarPark>> noteListFuture = databaseHelper.getCarparkList();
+      noteListFuture.then((carparkList) {
         setState(() {
-          this.bookmarkList = bookmarkList;
-          this.count = bookmarkList.length;
+          this.carparkList = carparkList;
+          this.count = carparkList.length;
         });
       });
     });
   }
 
   void insertInit() async {
-    Bookmark initBookmark =
-        new Bookmark("BLK 37 CIRCUIT ROAD", "M16	", 33937.7242, 34516.7499);
-    this.databaseHelper.insertBookmark(initBookmark);
+    CarPark initCarpark = CarPark(
+        "BLK 270/271 ALBERT CENTRE BASEMENT CAR PARK", "ACB", 1.301063272,
+        103.854118);
+    this.databaseHelper.insertCarpark(initCarpark);
   }
 }

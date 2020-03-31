@@ -1,25 +1,25 @@
+import 'package:parkapp/models/car_park.dart';
 import 'package:sqflite/sqflite.dart';
 import 'dart:async';
 import 'dart:io';
 import 'package:path_provider/path_provider.dart';
-import 'package:parkapp/models/bookmark.dart';
+import 'package:path/path.dart' as p;
 
 class DatabaseHelper {
   static DatabaseHelper _databaseHelper;
   static Database _database;
 
-  String bookmarkTable = 'bookmarkTable';
-  String colName = 'LocationName';
-  String colID = 'LocationID';
-  String colX = 'cX';
-  String colY = 'cY';
+  String carparkTable = 'carparkTable';
+  String colAddress = 'address';
+  String colID = 'ID';
+  String colLat = 'lat';
+  String colLng = 'lng';
 
   DatabaseHelper._createInstance();
 
   factory DatabaseHelper() {
     if (_databaseHelper == null) {
-      _databaseHelper = DatabaseHelper
-          ._createInstance();
+      _databaseHelper = DatabaseHelper._createInstance();
     }
     return _databaseHelper;
   }
@@ -33,7 +33,7 @@ class DatabaseHelper {
 
   Future<Database> initializeDatabase() async {
     Directory directory = await getApplicationDocumentsDirectory();
-    String path = directory.path + 'bookmarks.db';
+    String path = p.join(directory.toString(), 'bookmarks.db');
 
     // Open/create the database at a given path
     var bookmarksDatabase =
@@ -42,55 +42,61 @@ class DatabaseHelper {
   }
 
   void _createDb(Database db, int newVersion) async {
-    await db.execute(
-        'CREATE TABLE $bookmarkTable($colID TEXT PRIMARY KEY,'
-            '$colName TEXT, $colX DOUBLE, $colY DOUBLE)');
+    await db.execute('CREATE TABLE $carparkTable($colID TEXT PRIMARY KEY,'
+        '$colAddress TEXT, $colLat DOUBLE, $colLng DOUBLE)');
   }
 
-  Future<List<Map<String, dynamic>>> getBookmarkMapList() async {
+  Future<List<Map<String, dynamic>>> getCarparkMapList() async {
     Database db = await this.database;
 
-    var result = await db.query(bookmarkTable, orderBy: '$colName ASC');
+    var result = await db.query(carparkTable, orderBy: '$colID ASC');
     return result;
   }
 
-  Future<int> insertBookmark(Bookmark bookmark) async {
+  Future<int> insertCarpark(CarPark carPark) async {
     Database db = await this.database;
-    var result = await db.insert(bookmarkTable, bookmark.toMap());
+    var result = await db.insert(carparkTable, carPark.toMap());
     return result;
   }
 
-  Future<int> updateBookmark(Bookmark bookmark) async {
+  Future<int> updateCarpark(CarPark carPark) async {
     var db = await this.database;
-    var result = await db.update(bookmarkTable, bookmark.toMap(),
-        where: '$colID = ?', whereArgs: [bookmark.LocationID]);
+    var result = await db.update(carparkTable, carPark.toMap(),
+        where: '$colID = ?', whereArgs: [carPark.number]);
     return result;
   }
 
-  Future<int> deleteBookmark(String ID) async {
+  Future<int> deleteCarpark(String ID) async {
     var db = await this.database;
-    int result =
-        await db.rawDelete("DELETE FROM $bookmarkTable WHERE LocationID = '$ID'");
+    int result = await db
+        .rawDelete("DELETE FROM $carparkTable WHERE ID = '$ID'");
+    return result;
+  }
+
+  Future<bool> checkExist(String ID) async {
+    var db = await this.database;
+    List<Map<String, dynamic>> queryResult = await db
+        .rawQuery("SELECT * FROM $carparkTable WHERE ID = '$ID'");
+    bool result = queryResult.isNotEmpty ? true : false;
     return result;
   }
 
   Future<int> getCount() async {
     Database db = await this.database;
     List<Map<String, dynamic>> x =
-        await db.rawQuery('SELECT COUNT (*) from $bookmarkTable');
+    await db.rawQuery('SELECT COUNT (*) from $carparkTable');
     int result = Sqflite.firstIntValue(x);
     return result;
   }
 
-  Future<List<Bookmark>> getBookmarkList() async {
-    var bookmarkMapList = await getBookmarkMapList();
-    int count =
-        bookmarkMapList.length;
+  Future<List<CarPark>> getCarparkList() async {
+    var carparkMapList = await getCarparkMapList();
+    int count = carparkMapList.length;
 
-    List<Bookmark> noteList = List<Bookmark>();
+    List<CarPark> noteList = List<CarPark>();
     // For loop to create a 'Note List' from a 'Map List'
     for (int i = 0; i < count; i++) {
-      noteList.add(Bookmark.fromMapObject(bookmarkMapList[i]));
+      noteList.add(CarPark.fromMapObject(carparkMapList[i]));
     }
 
     return noteList;
