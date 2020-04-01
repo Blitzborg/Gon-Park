@@ -7,8 +7,9 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:google_maps_webservice/places.dart';
 import 'package:parkapp/models/car_park.dart';
 import 'package:parkapp/models/carpark_data.dart';
-import 'package:parkapp/main.dart';
 import 'package:parkapp/utils/database_helper.dart';
+import 'package:parkapp/views/SettingsPage.dart';
+import 'package:sqflite/sqflite.dart';
 
 const APIKey = "AIzaSyDpNphqq_FzaHNKvm6u3Z2B_QIgUQG0oZQ";
 
@@ -29,12 +30,13 @@ class MyAppState extends State<Nearby> {
   Widget _body;
   String searchAddr;
   final double _zoom = 16;
+  int count = 0;
 
   @override
   void initState() {
     if (bookmarkedCarparks == null) {
       bookmarkedCarparks = new List<CarPark>();
-      //updateCarparkList();
+      updateListView();
     }
     _body = Center(child: CircularProgressIndicator());
     allCarParkList = CarparkData.loadcarparks();
@@ -91,6 +93,7 @@ class MyAppState extends State<Nearby> {
                                 onPressed: () {
                                   bookmarkedCarparks.add(carPark);
                                   databaseHelper.insertCarpark(carPark);
+                                  updateListView();
                                   Navigator.of(context).pop();
                                 },
                               ),
@@ -125,34 +128,33 @@ class MyAppState extends State<Nearby> {
 
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text("Home"),
-            actions: <Widget>[
-              IconButton(
-                icon: Icon(Icons.search),
-                onPressed: () async {
-                  Prediction p = await PlacesAutocomplete.show(
-                      context: context,
-                      apiKey: APIKey,
-                      mode: Mode.overlay,
-                      // Mode.fullscreen
-                      language: "en",
-                      components: [new Component(Component.country, "sg")]);
-                  PlacesDetailsResponse place = await _places
-                      .getDetailsByPlaceId(p.placeId);
-                  zoomIn(place.result.geometry.location.lat,
-                      place.result.geometry.location.lng);
-                  // mapController.moveCamera(
-                  //     CameraUpdate.newCameraPosition(CameraPosition(
-                  //         target: LatLng(place.result.geometry.location.lat,
-                  //             place.result.geometry.location.lng),
-                  //         zoom: 15)));
-                },
-              )
-            ]),
-        body: Stack(
-          children: <Widget>[
-            _body,
-            /*Card(
+      appBar: AppBar(title: Text("Home"), actions: <Widget>[
+        IconButton(
+          icon: Icon(Icons.search),
+          onPressed: () async {
+            Prediction p = await PlacesAutocomplete.show(
+                context: context,
+                apiKey: APIKey,
+                mode: Mode.overlay,
+                // Mode.fullscreen
+                language: "en",
+                components: [new Component(Component.country, "sg")]);
+            PlacesDetailsResponse place =
+                await _places.getDetailsByPlaceId(p.placeId);
+            zoomIn(place.result.geometry.location.lat,
+                place.result.geometry.location.lng);
+            // mapController.moveCamera(
+            //     CameraUpdate.newCameraPosition(CameraPosition(
+            //         target: LatLng(place.result.geometry.location.lat,
+            //             place.result.geometry.location.lng),
+            //         zoom: 15)));
+          },
+        ),
+      ]),
+      body: Stack(
+        children: <Widget>[
+          _body,
+          /*Card(
                 child: TextField(
                   decoration: InputDecoration(
                     hintText: "Search",
@@ -210,8 +212,82 @@ class MyAppState extends State<Nearby> {
                     });
                   },
                 ))*/
-          ],
-        ));
+        ],
+      ),
+      drawer: Drawer(
+          child: ListView(padding: EdgeInsets.zero, children: <Widget>[
+            Container(
+                height: 100.0,
+                child: DrawerHeader(
+                    child: Text(
+                      'Settings',
+                      style: Theme
+                          .of(context)
+                          .textTheme
+                          .subhead,
+                    ))),
+            ListTile(
+                leading: Icon(Icons.settings),
+                title: Text(
+                  'View settings',
+                  style: Theme
+                      .of(context)
+                      .textTheme
+                      .subhead,
+                ),
+                onTap: () {
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => SettingsPage()));
+                }),
+            Container(
+                height: 100.0,
+                child: DrawerHeader(
+                    child: Text(
+                      'Bookmarks',
+                      style: Theme
+                          .of(context)
+                          .textTheme
+                          .subhead,
+                    ))),
+            Container(
+              height: double.maxFinite,
+              child: ListView.builder(
+                itemCount: count,
+                itemBuilder: (BuildContext context, int position) {
+                  return ListTile(
+                      leading: Icon(Icons.location_on),
+                      title: Text(
+                        this.bookmarkedCarparks[position].address,
+                        style: Theme
+                            .of(context)
+                            .textTheme
+                            .subhead,
+                      ),
+                      trailing: GestureDetector(
+                        child: Icon(
+                          Icons.delete,
+                          color: Colors.grey,
+                        ),
+                        onTap: () {
+                          _delete(context, bookmarkedCarparks[position]);
+                        },
+                      ),
+                      onTap: () {
+                        mapController.moveCamera(CameraUpdate.newCameraPosition(
+                            CameraPosition(
+                                target: LatLng(
+                                    bookmarkedCarparks[position].latitude,
+                                    bookmarkedCarparks[position].longitude),
+                                zoom: 18)));
+                        Navigator.pop(context, bookmarkedCarparks[position]);
+                      });
+                },
+              ),
+            )
+          ]
+          )
+      ),
+    );
   }
 
   Widget bodyWidget() {
@@ -228,6 +304,31 @@ class MyAppState extends State<Nearby> {
     );
   }
 
+  void _delete(BuildContext context, CarPark carpark) async {
+    int result = await databaseHelper.deleteCarpark(carpark.number);
+    if (result != 0) {
+      _showSnackBar(context, 'Bookmark Deleted Successfully');
+      updateListView();
+    }
+  }
+
+  void _showSnackBar(BuildContext context, String message) {
+    final snackBar = SnackBar(content: Text(message));
+    Scaffold.of(context).showSnackBar(snackBar);
+  }
+
+  void updateListView() {
+    final Future<Database> dbFuture = databaseHelper.initializeDatabase();
+    dbFuture.then((database) {
+      Future<List<CarPark>> noteListFuture = databaseHelper.getCarparkList();
+      noteListFuture.then((carparkList) {
+        setState(() {
+          this.bookmarkedCarparks = carparkList;
+          this.count = carparkList.length;
+        });
+      });
+    });
+  }
 
   searchAndNavigate() {
     Geolocator().placemarkFromAddress(searchAddr).then((newLocation) {
@@ -238,11 +339,10 @@ class MyAppState extends State<Nearby> {
     });
   }
 
-
   Future<void> zoomIn(double lat, double long) async {
     GoogleMapController controller = await _controllermap.future;
-    controller.animateCamera(
-        CameraUpdate.newLatLngZoom(LatLng(lat, long), _zoom));
+    controller
+        .animateCamera(CameraUpdate.newLatLngZoom(LatLng(lat, long), _zoom));
   }
 }
 

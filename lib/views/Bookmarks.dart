@@ -5,7 +5,7 @@ import 'package:parkapp/models/car_park.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:parkapp/utils/database_helper.dart';
 
-import 'Nearby.dart';
+import 'package:parkapp/controllers/homePage.dart';
 
 class Bookmarks extends StatefulWidget {
   @override
@@ -31,13 +31,13 @@ class BookmarkListState extends State<Bookmarks> {
         title: Text('Bookmarks'),
       ),
       body: getNoteListView(),
-      floatingActionButton: FloatingActionButton(
+      /*floatingActionButton: FloatingActionButton(
         onPressed: () {
           //print(this.carparkList.length);
           insertInit();
           updateListView();
         },
-      ),
+      ),*/
     );
   }
 
@@ -51,24 +51,24 @@ class BookmarkListState extends State<Bookmarks> {
           color: Colors.white,
           elevation: 2.0,
           child: ListTile(
-            leading: Icon(Icons.location_on),
-            title: Text(
-              this.carparkList[position].address,
-              style: titleStyle,
-            ),
-            trailing: GestureDetector(
-              child: Icon(
-                Icons.delete,
-                color: Colors.grey,
+              leading: Icon(Icons.location_on),
+              title: Text(
+                this.carparkList[position].address,
+                style: titleStyle,
+              ),
+              trailing: GestureDetector(
+                child: Icon(
+                  Icons.delete,
+                  color: Colors.grey,
+                ),
+                onTap: () {
+                  _delete(context, carparkList[position]);
+                },
               ),
               onTap: () {
-                _delete(context, carparkList[position]);
-              },
-            ),
-            onTap: () {
-
-            },
-          ),
+                Navigator.pushReplacement(context,
+                    MaterialPageRoute(builder: (context) => MyHomePage()));
+              }),
         );
       },
     );
@@ -101,9 +101,8 @@ class BookmarkListState extends State<Bookmarks> {
   }
 
   void insertInit() async {
-    CarPark initCarpark = CarPark(
-        "BLK 270/271 ALBERT CENTRE BASEMENT CAR PARK", "ACB", 1.301063272,
-        103.854118);
+    CarPark initCarpark = CarPark("BLK 270/271 ALBERT CENTRE BASEMENT CAR PARK",
+        "ACB", 1.301063272, 103.854118);
     this.databaseHelper.insertCarpark(initCarpark);
   }
 }
