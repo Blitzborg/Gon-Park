@@ -1,9 +1,9 @@
-class CarPark {
+class Carpark {
   String number, address;
   int lotsAvailable, totalLots;
   double fraction_taken, distance, latitude, longitude;
 
-  CarPark(String number, String address, double lat, double long) {
+  Carpark(String number, String address, double lat, double long) {
     this.number = number;
     this.address = address;
     this.lotsAvailable = 0; //api
@@ -24,7 +24,7 @@ class CarPark {
     return map;
   }
 
-  CarPark.fromMapObject(Map<String, dynamic> map) {
+  Carpark.fromMapObject(Map<String, dynamic> map) {
     this.number = map['ID'];
     this.address = map['address'];
     this.lotsAvailable = 0; //api

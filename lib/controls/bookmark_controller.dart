@@ -1,12 +1,12 @@
-import 'package:parkapp/models/car_park.dart';
+import 'package:parkapp/models/carpark.dart';
 import 'package:sqflite/sqflite.dart';
 import 'dart:async';
 import 'dart:io';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart' as p;
 
-class DatabaseHelper {
-  static DatabaseHelper _databaseHelper;
+class BookmarkController {
+  static BookmarkController _bookmarkController;
   static Database _database;
 
   String carparkTable = 'carparkTable';
@@ -15,13 +15,13 @@ class DatabaseHelper {
   String colLat = 'lat';
   String colLng = 'lng';
 
-  DatabaseHelper._createInstance();
+  BookmarkController._createInstance();
 
-  factory DatabaseHelper() {
-    if (_databaseHelper == null) {
-      _databaseHelper = DatabaseHelper._createInstance();
+  factory BookmarkController() {
+    if (_bookmarkController == null) {
+      _bookmarkController = BookmarkController._createInstance();
     }
-    return _databaseHelper;
+    return _bookmarkController;
   }
 
   Future<Database> get database async {
@@ -53,13 +53,13 @@ class DatabaseHelper {
     return result;
   }
 
-  Future<int> insertCarpark(CarPark carPark) async {
+  Future<int> insertCarpark(Carpark carPark) async {
     Database db = await this.database;
     var result = await db.insert(carparkTable, carPark.toMap());
     return result;
   }
 
-  Future<int> updateCarpark(CarPark carPark) async {
+  Future<int> updateCarpark(Carpark carPark) async {
     var db = await this.database;
     var result = await db.update(carparkTable, carPark.toMap(),
         where: '$colID = ?', whereArgs: [carPark.number]);
@@ -89,14 +89,14 @@ class DatabaseHelper {
     return result;
   }
 
-  Future<List<CarPark>> getCarparkList() async {
+  Future<List<Carpark>> getCarparkList() async {
     var carparkMapList = await getCarparkMapList();
     int count = carparkMapList.length;
 
-    List<CarPark> noteList = List<CarPark>();
+    List<Carpark> noteList = List<Carpark>();
     // For loop to create a 'Note List' from a 'Map List'
     for (int i = 0; i < count; i++) {
-      noteList.add(CarPark.fromMapObject(carparkMapList[i]));
+      noteList.add(Carpark.fromMapObject(carparkMapList[i]));
     }
 
     return noteList;

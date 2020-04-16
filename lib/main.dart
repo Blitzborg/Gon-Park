@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:parkapp/controllers/homePage.dart';
-import 'package:parkapp/models/car_park.dart';
-import 'package:parkapp/utils/database_helper.dart';
-import 'package:parkapp/views/Nearby.dart';
+import 'package:parkapp/views/homepage.dart';
 
 void main() => runApp(MyApp());
 
@@ -15,7 +12,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: Nearby(),
+      home: HomePage(),
     );
   }
 }
